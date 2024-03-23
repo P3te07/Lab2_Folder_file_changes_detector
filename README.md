@@ -17,8 +17,9 @@ The program updates itself every 5 seconds so, no matter when you change the fil
 Other features are:
 1. New files are detected too, they are shown in the terminal.
 2. Deleted files are shown in the moment they are deleted.
-3. The code has an easy structure that you can learn on.
-4. It's fairly easy to upgrade it, for example to introduce a custom folder location.
-5. With some more advanced skills, you can implement a batch verify system.
+3. There is a snapshot JSON file in the folder that you have replaced the location in Step 4, this folder contains the snapshots taken.
+4. The code has an easy structure that you can learn on.
+5. It's fairly easy to upgrade it, for example to introduce a custom folder location.
+6. With some more advanced skills, you can implement a batch verify system.
 
 That's all you need to know in order to use this detector. Have fun using it and I hope that it will be upgraded with better versions. 
