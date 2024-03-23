@@ -2,14 +2,26 @@ import os
 from datetime import datetime
 import threading
 import time
+import json
 
 class File:
     def __init__(self, folder):
         self.folder = folder
         self.snapshot = set()
+        self.snapshot_file = os.path.join(folder, "snapshot.json")
+        self.load_snapshot()
         self.snapshot_time = None
         self.update_event = threading.Event()
         self.update_thread = threading.Thread(target=self.update_snapshot, daemon=True)
+
+    def load_snapshot(self):
+        if os.path.exists(self.snapshot_file):
+            with open(self.snapshot_file, "r") as f:
+                self.snapshot = set(json.load(f))
+
+    def save_snapshot(self):
+        with open(self.snapshot_file, "w") as f:
+            json.dump(list(self.snapshot), f)
 
     def update_snapshot(self):
         while not self.update_event.is_set():
@@ -22,6 +34,10 @@ class File:
                     print("New files added:", new_files)
                 if deleted_files:
                     print("Files deleted:", deleted_files)
+                
+                save_thread = threading.Thread(target=self.save_snapshot)
+                save_thread.start()
+                
             self.snapshot = current_files
             time.sleep(5) 
 
@@ -31,6 +47,11 @@ class File:
     def stop_update_thread(self):
         self.update_event.set()
         self.update_thread.join()
+
+    def update(self):
+        update_thread = threading.Thread(target=self.update_snapshot)
+        update_thread.start()
+        print("Manual update initiated.")
 
 class Info(File):
     def list_files_and_changes(self):
@@ -56,7 +77,6 @@ class Status(File):
                 last_modified_time_str = datetime.fromtimestamp(last_modified_time).strftime('%Y-%m-%d %H:%M:%S')
                 print(f"File: {file},\t\t Last Modified Time: {last_modified_time_str}")
 
-
 folder_path = r"C:\Users\Admin\Desktop\TOTALLY_NOT_GTA6_Leaks"
 info = Info(folder_path)
 status = Status(folder_path)
@@ -64,8 +84,10 @@ update = File(folder_path)
 update.start_update_thread()
 
 while True:
-    action = input("Enter the action you want to perform: Info / Status (or type 'exit' to quit): ").lower()
-    if action == "info":
+    action = input("Enter the action you want to perform: Update / Info / Status (or type 'exit' to quit): ").lower()
+    if action == "update":
+        update.update()
+    elif action == "info":
         info.list_files_and_changes()
     elif action == "status":
         status.check_status()
