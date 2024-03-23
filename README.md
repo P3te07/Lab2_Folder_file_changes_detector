@@ -10,7 +10,8 @@ In order to run the program without any problems, you should follow these steps:
 7. On the terminal, there should appear: Choose one of the options: Info / Status (or type "exit" in order to exit):.
 8. Type "Info" in order to show the file name and it's size (The way you enter the option is not unique. You can type InFO and the program will detect it).
 9. Type "Status" in order to show the file name and the date it has been modified (Same as the Info, it doesn't matter how you enter it(ex: STatuS)).
-10. Type "Update" in order to update the snapshot 
+10. Type "Update" in order to update the snapshot
+11. Type "Exit" in order to exit the program (it may take a few seconds)
 
 That's all you need to do in order to use this program. I'll give you some information about the program.
 This program is made to show every change in a folder **On WINDOWS** the folder can be changed by pasting the folder location instead of the data in line 60.
