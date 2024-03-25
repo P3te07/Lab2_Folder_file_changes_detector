@@ -3,7 +3,7 @@ This is the User Manual of the program that shows every modification done to a s
 In order to run the program without any problems, you should follow these steps:
 1. Open your compiler. It is mandatory to have an installed compliler like Microsoft Virtual Studio Code or any other Python compiler. **Online compilers DON'T WORK** as I have tested.
 2. Once the compiler is set up, open a new python file and paste the code in.
-3. Search for line 60 where is the file location.
+3. Search for line 80 where is the file location.
 4. Replace the file location with the location of the folder you want to verify.
 5. If you run VSCode, there shouldn't be any problems in Problems field.
 6. Run the code.
